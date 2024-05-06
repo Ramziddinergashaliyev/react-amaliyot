@@ -1,0 +1,25 @@
+.products {
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 40px;
+  }
+
+  &__card {
+    box-shadow: 1px 1px 10px gray;
+  }
+
+  &__card__info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  &__card__img {
+    img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+  }
+}
