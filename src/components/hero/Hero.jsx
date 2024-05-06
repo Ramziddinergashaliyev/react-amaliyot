@@ -7,7 +7,6 @@ function Hero() {
   console.log(productData);
   return (
     <section className="products container">
-      <h1 className="products__title">Products</h1>
       <div className="products__cards">
         {productData.map((product) => (
           <Products product={product} key={product.id} />

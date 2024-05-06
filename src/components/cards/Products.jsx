@@ -9,11 +9,11 @@ const Products = ({ product }) => {
         <img src={img} alt="" />
       </div>
       <div className="products__card__info">
-        <h3 className="products__card__title">{name}</h3>
-        <p className="products__card__text">{category}</p>
-        {/* <p className="products__card__desc">{info}</p> */}
-        <p className="products__card__desc">{unit}</p>
-        <p className="products__card__desc">{price}</p>
+        <h3 className="products__card__title">name: {name}</h3>
+        <p className="products__card__text">category: {category}</p>
+        <p className="products__card__desc">info: {info}</p>
+        <p className="products__card__desc">unit: {unit}</p>
+        <p className="products__card__desc">price: {price}</p>
         <button className="products__card__btn">Add</button>
       </div>
     </div>
