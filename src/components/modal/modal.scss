@@ -1,0 +1,41 @@
+.modal {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  overflow-y: scroll;
+  // overflow: ;
+  top: 0;
+  left: 0;
+  background-color: skyblue;
+  padding: 40px 0px;
+  display: none;
+  scrollbar-width: none;
+}
+.closeModal {
+  display: none;
+}
+
+.modal__close {
+  font-size: 40px;
+  color: red;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.modal__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 40px;
+}
+.card {
+  img {
+    width: 100%;
+    height: 300px;
+  }
+}
+
+.show__modal {
+  display: block;
+}
