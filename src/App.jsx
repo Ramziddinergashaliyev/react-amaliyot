@@ -13,7 +13,7 @@ function App() {
 
   return (
     <Fragment>
-      <Header setShowmodal={setShowmodal} />
+      {/* <Header setShowmodal={setShowmodal} /> */}
       <Routes>
         <Route path="/" element={<Teachers />} />
         <Route path="/students" element={<Stydents />} />

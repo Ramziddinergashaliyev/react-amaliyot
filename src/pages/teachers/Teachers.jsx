@@ -82,7 +82,6 @@ function Teachers() {
         <p className="teacher__card__desc">phoneNumber: {e.phoneNumber}</p>
       </div>
       <div className="teacher__card__btns">
-        <button>View students</button>
         <button>Edit</button>
         <button onClick={() => hundleDelete(e.id)}>Delete</button>
       </div>
@@ -108,17 +107,21 @@ function Teachers() {
         <div className="teacher__body">
           <div className="teacher__body__logo">Logo</div>
           <div className="teacher__body__btns">
+            <select name="" id="">
+              <option value="All">All</option>
+              <option value="Merried">Merried</option>
+              <option value="Single">Single</option>
+            </select>
+            <select name="" id="">
+              <option value="Order">Order</option>
+              <option value="Alphabitic">Merried</option>
+              <option value="Revorse">Revorse</option>
+            </select>
             <button
               onClick={() => setShowModal(true)}
               className="teacher__body__btn"
             >
               Add teachers
-            </button>
-            <button
-              onClick={() => setShowModal(false)}
-              className="teacher__body__btn"
-            >
-              Delete teachers
             </button>
           </div>
         </div>
@@ -143,6 +146,13 @@ function Teachers() {
           }`}
         >
           <form className="teacher__form" action="">
+            <div
+              onClick={() => setShowModal(false)}
+              className="teacher__body__close"
+            >
+              X
+            </div>
+            <h1>Products</h1>
             <input
               value={newProduct.avatar}
               placeholder="img"
