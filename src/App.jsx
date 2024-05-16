@@ -1,31 +1,35 @@
 import { Fragment, useState } from "react";
-import Hero from "./components/hero/Hero";
 import Footer from "./components/layout/footer/Footer";
 import Header from "./components/layout/header/Header";
 import Modal from "./components/modal/Modal";
 import { productData } from "./static/productsData";
+import { Routes, Route } from "react-router-dom";
+import Teachers from "./pages/teachers/Teachers";
+import Stydents from "./pages/students/Stydents";
+import Home from "./pages/home/Home";
 
 function App() {
   const [showmodal, setShowmodal] = useState(false);
 
-  const products = productData?.slice(0, 3).map((el) => (
-    <div className="card">
-      <img src={el.img} alt="" />
-      <h3>{el.info}</h3>
-      <p>{el.category}</p>
-    </div>
-  ));
-
   return (
     <Fragment>
       <Header setShowmodal={setShowmodal} />
+      <Routes>
+        <Route path="/" element={<Teachers />} />
+        <Route path="/students" element={<Stydents />} />
+        <Route />
+      </Routes>
+
       <Modal showmodal={showmodal} setShowmodal={setShowmodal}>
-        <div className="modal__cards container">{products}</div>
+        <div className="modal__cards container">
+          <form action="">
+            <input type="text" />
+            <input type="text" />
+            <input type="text" />
+            <button>See more</button>
+          </form>
+        </div>
       </Modal>
-      <main>
-        <Hero />
-      </main>
-      <Footer />
     </Fragment>
   );
 }

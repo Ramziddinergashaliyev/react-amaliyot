@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./header.scss";
 import img1 from "../../../assets/images/bars.svg";
+import { NavLink } from "react-router-dom";
 
 function Header({ setShowmodal }) {
   const [showlist, setShowlist] = useState(false);
@@ -19,24 +20,10 @@ function Header({ setShowmodal }) {
         </div>
         <ul className={`navbar__item ${showlist ? "navbar__show" : ""}`}>
           <li className="navbar__list">
-            <a className="navbar__link" href="#">
-              Home
-            </a>
+            <NavLink to={"/"}>Teachers</NavLink>
           </li>
           <li className="navbar__list">
-            <a className="navbar__link" href="#">
-              About
-            </a>
-          </li>
-          <li className="navbar__list">
-            <a className="navbar__link" href="#">
-              Contact
-            </a>
-          </li>
-          <li className="navbar__list">
-            <a className="navbar__link" href="#">
-              Blog
-            </a>
+            <NavLink to={"/students"}>Students</NavLink>
           </li>
           <li
             onClick={() => setShowlist(false)}
@@ -46,7 +33,16 @@ function Header({ setShowmodal }) {
           </li>
         </ul>
         <div className="navbar__btns">
-          <button className="navbar__btn navbar__learn__more">Lear more</button>
+          <select name="" id="">
+            <option value="All">All</option>
+            <option value="Merried">Merried</option>
+            <option value="Single">Single</option>
+          </select>
+          <select name="" id="">
+            <option value="Order">Order</option>
+            <option value="Alphabitic">Merried</option>
+            <option value="Revorse">Revorse</option>
+          </select>
           <button onClick={propsCard} className="navbar__btn">
             Show modal
           </button>
