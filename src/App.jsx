@@ -7,9 +7,11 @@ import { Routes, Route } from "react-router-dom";
 import Teachers from "./pages/teachers/Teachers";
 import Stydents from "./pages/students/Stydents";
 import Home from "./pages/home/Home";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const [showmodal, setShowmodal] = useState(false);
+  // const [showmodal, setShowmodal] = useState(false);
 
   return (
     <Fragment>
@@ -20,7 +22,8 @@ function App() {
         <Route />
       </Routes>
 
-      <Modal showmodal={showmodal} setShowmodal={setShowmodal}>
+      <ToastContainer />
+      {/* <Modal showmodal={showmodal} setShowmodal={setShowmodal}>
         <div className="modal__cards container">
           <form action="">
             <input type="text" />
@@ -29,7 +32,7 @@ function App() {
             <button>See more</button>
           </form>
         </div>
-      </Modal>
+      </Modal> */}
     </Fragment>
   );
 }

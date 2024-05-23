@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./teacher.scss";
 import axios, { Axios } from "axios";
+import { toast } from "react-toastify";
 
 let initionalition = {
   avatar: "",
@@ -16,6 +17,8 @@ function Teachers() {
   const [pages, setPages] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [newProduct, setnewProduct] = useState(initionalition);
+  const [loading, setLoading] = useState(false);
+  const [edit, setEdit] = useState(null);
   let limit = 6;
 
   function getTeacher() {
@@ -24,7 +27,8 @@ function Teachers() {
         `https://6645a4ffb8925626f8928352.mockapi.io/schools/Teachers?limit=${limit}&page=${pages}`
       )
       .then((res) => setProduct(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   }
 
   function teacherPagenation() {
@@ -46,15 +50,18 @@ function Teachers() {
   }
 
   const hundleDelete = (id) => {
-    axios
-      .delete(
-        `https://6645a4ffb8925626f8928352.mockapi.io/schools/Teachers/${id}`
-      )
-      .then((res) => {
-        console.log(res);
-        getTeacher();
-      })
-      .catch((err) => console.log(err));
+    if (confirm("Ochirilsinmi")) {
+      axios
+        .delete(
+          `https://6645a4ffb8925626f8928352.mockapi.io/schools/Teachers/${id}`
+        )
+        .then((res) => {
+          console.log(res);
+          getTeacher();
+          toast.success("malumot Ochirildi");
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   useEffect(() => {
@@ -82,23 +89,47 @@ function Teachers() {
         <p className="teacher__card__desc">phoneNumber: {e.phoneNumber}</p>
       </div>
       <div className="teacher__card__btns">
-        <button>Edit</button>
+        <button onClick={() => hundleEdit(e)}>Edit</button>
         <button onClick={() => hundleDelete(e.id)}>Delete</button>
       </div>
     </div>
   ));
 
+  const hundleEdit = (e) => {
+    setShowModal(true);
+    setEdit(e.id);
+    setnewProduct(e);
+  };
+
   const hudleCreate = (e) => {
     e.preventDefault();
-    axios
-      .post(
-        `https://6645a4ffb8925626f8928352.mockapi.io/schools/Teachers`,
-        newProduct
-      )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
+    if (edit) {
+      axios
+        .put(
+          `https://6645a4ffb8925626f8928352.mockapi.io/schools/Teachers/${edit}`,
+          newProduct
+        )
+        .then((res) => {
+          getTeacher();
+          setShowModal(false);
+          setnewProduct(initionalition);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      axios
+        .post(
+          `https://6645a4ffb8925626f8928352.mockapi.io/schools/Teachers`,
+          newProduct
+        )
+        .then((res) => {
+          getTeacher();
+          setShowModal(false);
+          console.log(res);
+          toast.success("Malumot yaratildi");
+          setnewProduct(initionalition);
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (
@@ -145,7 +176,7 @@ function Teachers() {
             showModal ? "teacher__show__module" : ""
           }`}
         >
-          <form className="teacher__form" action="">
+          <form onSubmit={hudleCreate} className="teacher__form" action="">
             <div
               onClick={() => setShowModal(false)}
               className="teacher__body__close"
@@ -154,6 +185,7 @@ function Teachers() {
             </div>
             <h1>Products</h1>
             <input
+              required
               value={newProduct.avatar}
               placeholder="img"
               onChange={(e) =>
@@ -162,6 +194,7 @@ function Teachers() {
               type="url"
             />
             <input
+              required
               value={newProduct.firstName}
               placeholder="firstname"
               onChange={(e) =>
@@ -173,6 +206,7 @@ function Teachers() {
               type="text"
             />
             <input
+              required
               value={newProduct.lastName}
               placeholder="lastname"
               onChange={(e) =>
@@ -181,6 +215,7 @@ function Teachers() {
               type="text"
             />
             <input
+              required
               value={newProduct.email}
               placeholder="email"
               onChange={(e) =>
@@ -189,6 +224,7 @@ function Teachers() {
               type="email"
             />
             <input
+              required
               value={newProduct.phoneNumber}
               placeholder="phoneNumber"
               onChange={(e) =>
@@ -199,7 +235,9 @@ function Teachers() {
               }
               type="number"
             />
-            <button onClick={hudleCreate}>Create</button>
+            <button disabled={loading}>
+              {loading ? "Loading..." : "Create"}
+            </button>
           </form>
         </div>
       </div>
