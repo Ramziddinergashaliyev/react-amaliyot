@@ -235,7 +235,7 @@ function Teachers() {
               }
               type="number"
             />
-            <button disabled={loading}>{loading ? "Save" : "Create"}</button>
+            <button>{edit ? "Save" : "Create"}</button>
           </form>
         </div>
       </div>
